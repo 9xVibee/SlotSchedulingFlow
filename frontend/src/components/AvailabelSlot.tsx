@@ -1,6 +1,7 @@
 import { ArrowUpRightFromCircle, BellPlus } from "lucide-react";
 import { Button } from "./ui/button";
 import { Link } from "react-router-dom";
+import { toast } from "sonner";
 
 type AvailabelSlots = {
   time: string;
@@ -12,6 +13,7 @@ const AvailabelSlot = ({ time, day, role }: AvailabelSlots) => {
   // for opening closing popover
   const handlePopOver = () => {
     console.log("pop over");
+    toast("Okayy");
   };
 
   return (
@@ -42,7 +44,7 @@ const AvailabelSlot = ({ time, day, role }: AvailabelSlots) => {
       {role == "physio" && (
         <Link
           to={"/details/id"}
-          className="hover:underline transition-all duration-200 text-gray-500 hover:text-black text-[1.2rem] flex items-center gap-1"
+          className="hover:underline transition-all duration-200 text-[1.2rem] flex items-center gap-1"
         >
           details <ArrowUpRightFromCircle className="size-4 mt-1" />
         </Link>

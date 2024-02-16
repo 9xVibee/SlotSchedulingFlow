@@ -4,6 +4,7 @@ import SignUp from "./components/SignUp";
 import Home from "./Pages/Home";
 import SlotScheduling from "./Pages/SlotScheduling";
 import Appointments from "./Pages/Appointments";
+import CreateSlot from "./Pages/CreateSlot";
 
 const appRouter = createBrowserRouter([
   {
@@ -25,6 +26,10 @@ const appRouter = createBrowserRouter([
       {
         path: "appointments",
         element: <Appointments />,
+      },
+      {
+        path: "createslot",
+        element: <CreateSlot />,
       },
     ],
   },

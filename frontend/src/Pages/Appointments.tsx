@@ -1,13 +1,14 @@
 import AvailabelSlot from "@/components/AvailabelSlot";
 import { Button } from "@/components/ui/button";
 import { motion } from "framer-motion";
+import { Link } from "react-router-dom";
 
 const Appointments = () => {
   const getBookedSlots = () => {};
   const getNonBookedSlots = () => {};
 
   return (
-    <div className="w-full h-fit pl-[4rem] pt-[1rem] pr-[2rem] flex flex-col gap-8">
+    <div className="w-full h-fit pl-[4rem] pt-[3rem] pr-[2rem] flex flex-col gap-8">
       <div className="flex flex-col gap-2">
         <div className="w-full flex justify-between items-center py-2 overflow-y-hidden">
           <motion.h1
@@ -32,7 +33,11 @@ const Appointments = () => {
             <Button onClick={getBookedSlots}>Booked</Button>
             <Button onClick={getNonBookedSlots}>Not-Booked</Button>
           </div>
-          {<Button>Slot Availability</Button>}
+          {
+            <Link to={"/createslot"}>
+              <Button>Slot Availability</Button>
+            </Link>
+          }
         </div>
       </div>
 

@@ -78,7 +78,7 @@ const SlotScheduling = () => {
     console.log("changed eve");
   };
   return (
-    <div className="w-full h-fit pl-[4rem] pt-[4rem] pr-[2rem] flex flex-col gap-10">
+    <div className="w-full h-fit pl-[4rem] pt-[2.4rem] pr-[2rem] flex flex-col gap-10">
       {/* Heading Section section */}
       <div className="w-full flex justify-between items-center py-2 overflow-y-hidden">
         <motion.h1
@@ -199,7 +199,15 @@ const SlotScheduling = () => {
           .fill("")
           .map((_, idx) => {
             if (loading) return <Skeletons />;
-            else return <AvailabelSlot time="10:00" day="Monday" key={idx} />;
+            else
+              return (
+                <AvailabelSlot
+                  role="admin"
+                  time="10:00"
+                  day="Monday"
+                  key={idx}
+                />
+              );
           })}
       </div>
     </div>
