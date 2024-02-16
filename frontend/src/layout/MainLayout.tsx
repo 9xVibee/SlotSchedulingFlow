@@ -4,7 +4,7 @@ import { Outlet } from "react-router-dom";
 const MainLayout = () => {
   return (
     <div className="w-full h-[100vh] relative">
-      <div className="absolute top-3 right-3">
+      <div className="absolute top-3 right-8">
         <ModeToggle />
       </div>
       <Outlet />

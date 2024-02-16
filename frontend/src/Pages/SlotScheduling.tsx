@@ -11,6 +11,8 @@ import {
   PopoverContent,
   PopoverTrigger,
 } from "@/components/ui/popover";
+import AvailabelSlot from "@/components/AvailabelSlot";
+import Skeletons from "./Skeleton";
 
 const days = [
   {
@@ -58,9 +60,16 @@ const SlotScheduling = () => {
   const [openEve, setOpenEve] = React.useState(false);
   const [day, setDay] = React.useState("monday");
   const [eve, setEve] = React.useState("evening");
+  const [loading, setLoading] = React.useState(true);
+
+  React.useEffect(() => {
+    setTimeout(() => {
+      setLoading(false);
+    }, 3000);
+  }, []);
 
   return (
-    <div className="w-full h-full pl-[4rem] pt-[4rem] pr-[2rem]">
+    <div className="w-full h-fit pl-[4rem] pt-[4rem] pr-[2rem] flex flex-col gap-10">
       {/* Heading Section section */}
       <div className="w-full flex justify-between items-center py-2 overflow-y-hidden">
         <motion.h1
@@ -174,8 +183,13 @@ const SlotScheduling = () => {
         </motion.div>
       </div>
       {/* Availabel Slots */}
-      <div className="w-full flex flex-col">
-        
+      <div className="w-full flex flex-col h-fit gap-4">
+        {Array(10)
+          .fill("")
+          .map((_, idx) => {
+            if (loading) return <Skeletons />;
+            else return <AvailabelSlot key={idx} />;
+          })}
       </div>
     </div>
   );
