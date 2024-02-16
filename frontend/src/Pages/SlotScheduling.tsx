@@ -68,6 +68,15 @@ const SlotScheduling = () => {
     }, 3000);
   }, []);
 
+  // hanlding day change
+  const handleDayChange = () => {
+    console.log("changed");
+  };
+
+  // handling eve change
+  const handleEveChange = () => {
+    console.log("changed eve");
+  };
   return (
     <div className="w-full h-fit pl-[4rem] pt-[4rem] pr-[2rem] flex flex-col gap-10">
       {/* Heading Section section */}
@@ -84,7 +93,7 @@ const SlotScheduling = () => {
             duration: 0.8,
             ease: "easeInOut",
           }}
-          className="font-bold text-5xl uppercase"
+          className="font-bold text-6xl uppercase"
         >
           Schedule Your Slot.
         </motion.h1>
@@ -126,6 +135,7 @@ const SlotScheduling = () => {
                       onSelect={(currentValue) => {
                         setDay(currentValue === day ? "" : currentValue);
                         setOpenDay(false);
+                        handleDayChange();
                       }}
                     >
                       <Check
@@ -165,6 +175,7 @@ const SlotScheduling = () => {
                       onSelect={(currentValue) => {
                         setEve(currentValue === eve ? "" : currentValue);
                         setOpenEve(false);
+                        handleEveChange();
                       }}
                     >
                       <Check
@@ -183,12 +194,12 @@ const SlotScheduling = () => {
         </motion.div>
       </div>
       {/* Availabel Slots */}
-      <div className="w-full flex flex-col h-fit gap-4">
+      <div className="w-full flex flex-col h-fit gap-4 py-2">
         {Array(10)
           .fill("")
           .map((_, idx) => {
             if (loading) return <Skeletons />;
-            else return <AvailabelSlot key={idx} />;
+            else return <AvailabelSlot time="10:00" day="Monday" key={idx} />;
           })}
       </div>
     </div>

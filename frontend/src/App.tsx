@@ -3,6 +3,7 @@ import MainLayout from "./layout/MainLayout";
 import SignUp from "./components/SignUp";
 import Home from "./Pages/Home";
 import SlotScheduling from "./Pages/SlotScheduling";
+import Appointments from "./Pages/Appointments";
 
 const appRouter = createBrowserRouter([
   {
@@ -20,6 +21,10 @@ const appRouter = createBrowserRouter([
       {
         path: "slot-scheduling",
         element: <SlotScheduling />,
+      },
+      {
+        path: "appointments",
+        element: <Appointments />,
       },
     ],
   },
