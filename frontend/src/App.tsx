@@ -2,6 +2,7 @@ import { createBrowserRouter } from "react-router-dom";
 import MainLayout from "./layout/MainLayout";
 import SignUp from "./components/SignUp";
 import Home from "./Pages/Home";
+import SlotScheduling from "./Pages/SlotScheduling";
 
 const appRouter = createBrowserRouter([
   {
@@ -9,12 +10,16 @@ const appRouter = createBrowserRouter([
     element: <MainLayout />,
     children: [
       {
+        path: "",
+        element: <Home />,
+      },
+      {
         path: "signup",
         element: <SignUp />,
       },
       {
-        path: "home",
-        element: <Home />,
+        path: "slot-scheduling",
+        element: <SlotScheduling />,
       },
     ],
   },
