@@ -35,6 +35,7 @@ const AdminSchema = new mongoose.Schema({
 });
 
 const SlotSchema = new mongoose.Schema({
+  physioName: String,
   createdBy: {
     type: mongoose.Schema.Types.ObjectId,
     ref: "Physio",

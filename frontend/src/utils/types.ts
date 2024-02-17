@@ -23,3 +23,12 @@ export type userDetails = {
   setUserDetail: (user: userType) => void;
   logoutUser: () => void;
 };
+
+export type slotType = {
+  remark: string;
+  day: string;
+  date: string;
+  isAllocated: boolean;
+  slotStartTime: string;
+  physioName: string;
+};

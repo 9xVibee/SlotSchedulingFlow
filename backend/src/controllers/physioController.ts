@@ -57,7 +57,7 @@ export const requestSlot = async (req: Request, res: Response) => {
 
   let slot = await Slots.findOne({
     createdBy: physio._id,
-    isAllocated: false,
+    isAllocated: true,
     $and: [
       { day: day },
       {
@@ -74,6 +74,7 @@ export const requestSlot = async (req: Request, res: Response) => {
   }
 
   slot = await Slots.create({
+    physioName: physio.name,
     createdBy: physio._id,
     weekStart,
     weekEnd,
@@ -86,5 +87,31 @@ export const requestSlot = async (req: Request, res: Response) => {
   res.status(200).json({
     message: "Request submitted successfully",
     slot,
+  });
+};
+
+export const getAllSlotsPhysio = async (req: Request, res: Response) => {
+  const { email } = req.body;
+
+  const physio = await Physio.findOne({ email });
+  if (!physio) {
+    return res.status(500).json({
+      message: "Physio not found",
+    });
+  }
+  const date = new Date().toISOString().slice(0, 10);
+  const slots = await Slots.find({
+    createdBy: physio._id,
+    $and: [
+      {
+        weekStart: { $lte: date },
+        weekEnd: { $gte: date },
+      },
+    ],
+  });
+
+  res.status(200).json({
+    message: "Done Successfully",
+    slots,
   });
 };

@@ -1,12 +1,13 @@
 import AvailabelSlot from "@/components/AvailabelSlot";
 import { Button } from "@/components/ui/button";
+import useBookUnBookSlots from "@/hooks/useBookUnBookSlots";
 import { motion } from "framer-motion";
 import { useNavigate } from "react-router-dom";
 import { toast } from "sonner";
 
 const Appointments = () => {
   const navigate = useNavigate();
-
+  const { loading, slots } = useBookUnBookSlots();
   const getBookedSlots = () => {};
   const getNonBookedSlots = () => {};
 

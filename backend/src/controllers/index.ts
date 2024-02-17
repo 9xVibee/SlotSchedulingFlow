@@ -12,17 +12,8 @@ export const getAllSlots = async (req: Request, res: Response) => {
       {
         weekEnd: { $gte: date },
       },
-      {
-        isAllocated: false,
-      },
     ],
   });
-
-  if (!slots) {
-    res.status(500).json({
-      message: "Internal Server Error",
-    });
-  }
 
   res.status(200).json({
     message: "Done Successfully",
