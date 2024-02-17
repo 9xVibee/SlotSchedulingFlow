@@ -55,6 +55,7 @@ const eveMood = [
     label: "Afternoon",
   },
 ];
+
 const SlotScheduling = () => {
   const [openDay, setOpenDay] = React.useState(false);
   const [openEve, setOpenEve] = React.useState(false);

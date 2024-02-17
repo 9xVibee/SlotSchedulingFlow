@@ -1,7 +1,19 @@
-import { ArrowUpRightFromCircle, BellPlus } from "lucide-react";
+import { BellPlus } from "lucide-react";
 import { Button } from "./ui/button";
-import { Link } from "react-router-dom";
+// import { Link } from "react-router-dom";
 import { toast } from "sonner";
+import {
+  AlertDialog,
+  AlertDialogAction,
+  AlertDialogContent,
+  AlertDialogDescription,
+  AlertDialogFooter,
+  AlertDialogHeader,
+  AlertDialogTitle,
+  AlertDialogTrigger,
+} from "@/components/ui/alert-dialog";
+import { Input } from "./ui/input";
+import { useState } from "react";
 
 type AvailabelSlots = {
   time: string;
@@ -10,9 +22,10 @@ type AvailabelSlots = {
 };
 
 const AvailabelSlot = ({ time, day, role }: AvailabelSlots) => {
+  const [patientName, setPatientName] = useState("");
+
   // for opening closing popover
   const handlePopOver = () => {
-    console.log("pop over");
     toast("Okayy");
   };
 
@@ -34,20 +47,33 @@ const AvailabelSlot = ({ time, day, role }: AvailabelSlots) => {
         )}
       </div>
       {role == "admin" && (
-        <Button
-          className="flex items-center justify-center gap-2"
-          onClick={handlePopOver}
-        >
-          Book Appointment <BellPlus className="size-5 mt-1" />
-        </Button>
-      )}
-      {role == "physio" && (
-        <Link
-          to={"/details/id"}
-          className="hover:underline transition-all duration-200 text-[1.2rem] flex items-center gap-1"
-        >
-          details <ArrowUpRightFromCircle className="size-4 mt-1" />
-        </Link>
+        <>
+          <AlertDialog>
+            <AlertDialogTrigger asChild>
+              <Button className="flex items-center justify-center gap-2">
+                Book Appointment <BellPlus className="size-5 mt-1" />
+              </Button>
+            </AlertDialogTrigger>
+            <AlertDialogContent>
+              <AlertDialogHeader>
+                <AlertDialogTitle>Enter Patient Name:</AlertDialogTitle>
+                <AlertDialogDescription>
+                  <Input
+                    onChange={(e) => {
+                      setPatientName(e.target.value);
+                    }}
+                    value={patientName}
+                  />
+                </AlertDialogDescription>
+              </AlertDialogHeader>
+              <AlertDialogFooter>
+                <AlertDialogAction onClick={handlePopOver}>
+                  Submit
+                </AlertDialogAction>
+              </AlertDialogFooter>
+            </AlertDialogContent>
+          </AlertDialog>
+        </>
       )}
     </div>
   );
