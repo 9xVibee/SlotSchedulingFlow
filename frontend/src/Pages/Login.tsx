@@ -4,6 +4,8 @@ import { useState } from "react";
 import { toast } from "sonner";
 import { Label } from "@/components/ui/label";
 import { RadioGroup, RadioGroupItem } from "@/components/ui/radio-group";
+import axios from "axios";
+import { useUserDetails } from "@/utils/store";
 
 type userDetails = {
   email: string;
@@ -17,9 +19,10 @@ const Login = () => {
     password: "",
     role: "",
   });
+  const { setUserDetail } = useUserDetails();
 
   // handle login
-  const handleLogin = () => {
+  const handleLogin = async () => {
     // checking email and password is empty or not
     if (!userDetails.email || !userDetails.password) {
       toast("Enter email, password!");
@@ -30,7 +33,17 @@ const Login = () => {
       toast("Enter valid email!");
       return;
     }
-    console.log(userDetails);
+
+    try {
+      const data = await axios.post(
+        `http://localhost:3000/api/${userDetails.role}/login`
+      );
+
+      console.log(data);
+      setUserDetail(data?.data?.user);
+    } catch (error) {
+      console.log("error i handle login", error);
+    }
   };
 
   return (

@@ -13,7 +13,7 @@ const Appointments = () => {
   const redirectThePhysio = () => {
     const curDate = new Date();
 
-    if (curDate.getDay() == 7) navigate("/createslot");
+    if (curDate.getDay() == 6) navigate("/createslot");
     else
       toast("Slot can only be create on sunday", {
         position: "top-center",
@@ -49,6 +49,7 @@ const Appointments = () => {
         </div>
       </div>
 
+      {/* availabel slots */}
       <div className="hideScrollBar w-full flex flex-col h-3/4 overflow-y-scroll gap-4 py-2">
         {Array(10)
           .fill("")

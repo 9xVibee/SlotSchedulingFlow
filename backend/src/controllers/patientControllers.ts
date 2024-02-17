@@ -3,11 +3,10 @@ import { Request, Response } from "express";
 
 // create patient
 const CreatePatient = async (req: Request, res: Response) => {
-  const { name, role, email, password } = req.body;
+  const { name, email, password } = req.body;
 
   const patient = await Patient.create({
     name,
-    role,
     password,
     email,
   });
