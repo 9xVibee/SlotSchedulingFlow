@@ -1,12 +1,24 @@
 import AvailabelSlot from "@/components/AvailabelSlot";
 import { Button } from "@/components/ui/button";
 import { motion } from "framer-motion";
-import { Link } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
+import { toast } from "sonner";
 
 const Appointments = () => {
+  const navigate = useNavigate();
+
   const getBookedSlots = () => {};
   const getNonBookedSlots = () => {};
 
+  const redirectThePhysio = () => {
+    const curDate = new Date();
+
+    if (curDate.getDay() == 7) navigate("/createslot");
+    else
+      toast("Slot can only be create on sunday", {
+        position: "top-center",
+      });
+  };
   return (
     <div className="w-full h-screen pt-[3rem] flex flex-col gap-8">
       <div className="flex flex-col gap-2">
@@ -33,11 +45,7 @@ const Appointments = () => {
             <Button onClick={getBookedSlots}>Booked</Button>
             <Button onClick={getNonBookedSlots}>Not-Booked</Button>
           </div>
-          {
-            <Link to={"/createslot"}>
-              <Button>Slot Availability</Button>
-            </Link>
-          }
+          {<Button onClick={redirectThePhysio}>Slot Availability</Button>}
         </div>
       </div>
 

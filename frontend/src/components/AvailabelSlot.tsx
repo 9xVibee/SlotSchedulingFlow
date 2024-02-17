@@ -12,7 +12,7 @@ import {
   AlertDialogTitle,
   AlertDialogTrigger,
 } from "@/components/ui/alert-dialog";
-import { Input } from "./ui/input";
+import { Textarea } from "./ui/textarea";
 import { useState } from "react";
 
 type AvailabelSlots = {
@@ -22,7 +22,7 @@ type AvailabelSlots = {
 };
 
 const AvailabelSlot = ({ time, day, role }: AvailabelSlots) => {
-  const [patientName, setPatientName] = useState("");
+  const [remarks, setRemarks] = useState("");
 
   // for opening closing popover
   const handlePopOver = () => {
@@ -51,18 +51,16 @@ const AvailabelSlot = ({ time, day, role }: AvailabelSlots) => {
           <AlertDialog>
             <AlertDialogTrigger asChild>
               <Button className="flex items-center justify-center gap-2">
-                Book Appointment <BellPlus className="size-5 mt-1" />
+                Allocate Slot <BellPlus className="size-5 mt-1" />
               </Button>
             </AlertDialogTrigger>
             <AlertDialogContent>
               <AlertDialogHeader>
-                <AlertDialogTitle>Enter Patient Name:</AlertDialogTitle>
+                <AlertDialogTitle>Remarks:</AlertDialogTitle>
                 <AlertDialogDescription>
-                  <Input
-                    onChange={(e) => {
-                      setPatientName(e.target.value);
-                    }}
-                    value={patientName}
+                  <Textarea
+                    onChange={(e) => setRemarks(e.target.value)}
+                    value={remarks}
                   />
                 </AlertDialogDescription>
               </AlertDialogHeader>

@@ -1,7 +1,7 @@
 import mongoose from "mongoose";
 require("dotenv").config();
 
-mongoose.connect("mongodb://localhost:27017/intercord");
+mongoose.connect("mongodb://localhost:27017/slotscheduling");
 const conn = mongoose.connection;
 
 // loggin message on database connect

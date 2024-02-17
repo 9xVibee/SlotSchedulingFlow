@@ -10,11 +10,9 @@ const PORT = 3000;
 dotenv.config();
 app.use(express.json());
 app.use(cors());
-app.use("/api", router);
 
-app.get("/", (req, res) => {
-  res.send("okay");
-});
+// routing
+app.use("/api/patient", router);
 
 app.listen(PORT, () => {
   console.log(`Server Started at port ${PORT}`);
