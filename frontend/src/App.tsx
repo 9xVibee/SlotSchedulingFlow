@@ -1,10 +1,10 @@
 import { createBrowserRouter } from "react-router-dom";
 import MainLayout from "./layout/MainLayout";
-import SignUp from "./components/SignUp";
 import Home from "./Pages/Home";
 import SlotScheduling from "./Pages/SlotScheduling";
 import Appointments from "./Pages/Appointments";
 import CreateSlot from "./Pages/CreateSlot";
+import Login from "./Pages/Login";
 
 const appRouter = createBrowserRouter([
   {
@@ -15,9 +15,10 @@ const appRouter = createBrowserRouter([
         path: "",
         element: <Home />,
       },
+
       {
-        path: "signup",
-        element: <SignUp />,
+        path: "/login",
+        element: <Login />,
       },
       {
         path: "slot-scheduling",
