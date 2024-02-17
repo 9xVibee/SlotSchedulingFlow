@@ -9,6 +9,7 @@ export const createPhysio = async (req: Request, res: Response) => {
     name,
     password,
     email,
+    role: "physio",
   });
 
   res.status(200).json({
@@ -21,12 +22,12 @@ export const loginPhysio = async (req: Request, res: Response) => {
   const { email, password } = req.body;
 
   const physio: PhysioType | null = await Physio.findOne({
-    email,
+    email: email,
   });
 
   if (!physio) {
     return res.status(500).json({
-      message: "Admin not found with this email",
+      message: "Physio not found with this email",
     });
   }
 
@@ -37,7 +38,7 @@ export const loginPhysio = async (req: Request, res: Response) => {
   }
 
   res.status(200).json({
-    physio,
+    user: physio,
     message: "Login successfull",
   });
 };

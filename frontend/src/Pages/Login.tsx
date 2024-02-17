@@ -1,50 +1,12 @@
 import { Button } from "@/components/ui/button";
 import { motion } from "framer-motion";
-import { useState } from "react";
-import { toast } from "sonner";
 import { Label } from "@/components/ui/label";
 import { RadioGroup, RadioGroupItem } from "@/components/ui/radio-group";
-import axios from "axios";
-import { useUserDetails } from "@/utils/store";
-
-type userDetails = {
-  email: string;
-  password: string;
-  role: string;
-};
+import useLoginHandle from "@/hooks/useLoginHandle";
 
 const Login = () => {
-  const [userDetails, setUserDetails] = useState<userDetails>({
-    email: "",
-    password: "",
-    role: "",
-  });
-  const { setUserDetail } = useUserDetails();
-
-  // handle login
-  const handleLogin = async () => {
-    // checking email and password is empty or not
-    if (!userDetails.email || !userDetails.password) {
-      toast("Enter email, password!");
-      return;
-    }
-    // checking if email is valid or not
-    if (!/^[\w\-\\.]+@([\w-]+\.)+[\w-]{2,}$/.test(userDetails?.email)) {
-      toast("Enter valid email!");
-      return;
-    }
-
-    try {
-      const data = await axios.post(
-        `http://localhost:3000/api/${userDetails.role}/login`
-      );
-
-      console.log(data);
-      setUserDetail(data?.data?.user);
-    } catch (error) {
-      console.log("error i handle login", error);
-    }
-  };
+  // using custom hook use loginHandle
+  const { handleLogin, setUserDetails, userDetails } = useLoginHandle();
 
   return (
     <div className="w-full h-full pt-[1rem] flex justify-center items-center flex-col gap-8">
@@ -123,7 +85,7 @@ const Login = () => {
                 value="Physio"
                 id="option-two"
                 onClick={() => {
-                  setUserDetails({ ...userDetails, role: "physio" });
+                  setUserDetails({ ...userDetails, role: "admin" });
                 }}
               />
               <Label htmlFor="option-thr">Admin</Label>
@@ -133,7 +95,7 @@ const Login = () => {
                 value="Admin"
                 id="option-thr"
                 onClick={() => {
-                  setUserDetails({ ...userDetails, role: "admin" });
+                  setUserDetails({ ...userDetails, role: "physio" });
                 }}
               />
               <Label htmlFor="option-two">Physio</Label>

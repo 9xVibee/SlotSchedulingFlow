@@ -9,6 +9,7 @@ const CreatePatient = async (req: Request, res: Response) => {
     name,
     password,
     email,
+    role: "patient",
   });
 
   res.status(200).json({

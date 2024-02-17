@@ -8,13 +8,21 @@ const userDefault: userType = {
 };
 
 export const useUserDetails = create<userDetails>((set) => {
+  const storedUserDetails = sessionStorage.getItem("userDetails");
   return {
-    user: userDefault,
+    user: storedUserDetails ? JSON.parse(storedUserDetails) : userDefault,
     setUserDetail: (userdata: userType) =>
       set(() => {
+        sessionStorage.setItem("userDetails", JSON.stringify(userdata));
         return {
           user: userdata,
         };
+      }),
+
+    logoutUser: () =>
+      set(() => {
+        sessionStorage.removeItem("userDetails");
+        return { user: userDefault };
       }),
   };
 });

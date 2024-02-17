@@ -12,7 +12,14 @@ export type slot = {
   remarks: string;
 };
 
+export type loginInfoType = {
+  email: string;
+  password: string;
+  role: string;
+};
+
 export type userDetails = {
   user: userType;
   setUserDetail: (user: userType) => void;
+  logoutUser: () => void;
 };
