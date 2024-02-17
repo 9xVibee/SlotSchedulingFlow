@@ -8,7 +8,7 @@ const Appointments = () => {
   const getNonBookedSlots = () => {};
 
   return (
-    <div className="w-full h-fit pl-[4rem] pt-[3rem] pr-[2rem] flex flex-col gap-8">
+    <div className="w-full h-screen pt-[3rem] flex flex-col gap-8">
       <div className="flex flex-col gap-2">
         <div className="w-full flex justify-between items-center py-2 overflow-y-hidden">
           <motion.h1
@@ -41,7 +41,7 @@ const Appointments = () => {
         </div>
       </div>
 
-      <div className="w-full flex flex-col h-fit gap-4 py-2">
+      <div className="hideScrollBar w-full flex flex-col h-3/4 overflow-y-scroll gap-4 py-2">
         {Array(10)
           .fill("")
           .map((_, idx) => {

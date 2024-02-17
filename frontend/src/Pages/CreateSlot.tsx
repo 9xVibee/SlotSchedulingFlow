@@ -54,7 +54,7 @@ const CreateSlot = () => {
   };
 
   return (
-    <div className="w-full h-full pl-[4rem] pt-[1rem] pr-[2rem] flex justify-center items-center flex-col gap-8">
+    <div className="w-full h-full pt-[1rem] flex justify-center items-center flex-col gap-8">
       <div className="w-full flex justify-center items-center py-2 overflow-y-hidden">
         <motion.h1
           initial={{

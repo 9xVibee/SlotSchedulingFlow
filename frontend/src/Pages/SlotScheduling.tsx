@@ -16,12 +16,12 @@ import Skeletons from "./Skeleton";
 
 const days = [
   {
-    value: "tuesday",
-    label: "Tuesday",
-  },
-  {
     value: "monday",
     label: "Monday",
+  },
+  {
+    value: "tuesday",
+    label: "Tuesday",
   },
   {
     value: "wednesday",
@@ -78,7 +78,7 @@ const SlotScheduling = () => {
     console.log("changed eve");
   };
   return (
-    <div className="w-full h-fit pl-[4rem] pt-[2.4rem] pr-[2rem] flex flex-col gap-10">
+    <div className="w-full h-screen pt-[2.4rem] flex flex-col gap-10">
       {/* Heading Section section */}
       <div className="w-full flex justify-between items-center py-2 overflow-y-hidden">
         <motion.h1
@@ -194,7 +194,7 @@ const SlotScheduling = () => {
         </motion.div>
       </div>
       {/* Availabel Slots */}
-      <div className="w-full flex flex-col h-fit gap-4 py-2">
+      <div className="hideScrollBar w-full flex flex-col overflow-y-scroll h-3/4 gap-4 py-2">
         {Array(10)
           .fill("")
           .map((_, idx) => {
