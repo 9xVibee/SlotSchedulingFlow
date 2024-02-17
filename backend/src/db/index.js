@@ -1,7 +1,7 @@
 import mongoose from "mongoose";
 require("dotenv").config();
 
-mongoose.connect("mongodb://localhost:27017/slotscheduling");
+mongoose.connect("mongodb://localhost:27017/intercord");
 const conn = mongoose.connection;
 
 // loggin message on database connect
@@ -18,7 +18,10 @@ const PatientSchema = new mongoose.Schema({
   name: String,
   email: String,
   password: String,
-  role: "patient",
+  role: {
+    type: String,
+    role: "patient",
+  },
 });
 
 const Patient = mongoose.model("Patient", PatientSchema);

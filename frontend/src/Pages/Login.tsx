@@ -2,26 +2,35 @@ import { Button } from "@/components/ui/button";
 import { motion } from "framer-motion";
 import { useState } from "react";
 import { toast } from "sonner";
+import { Label } from "@/components/ui/label";
+import { RadioGroup, RadioGroupItem } from "@/components/ui/radio-group";
 
 type userDetails = {
   email: string;
   password: string;
+  role: string;
 };
 
 const Login = () => {
   const [userDetails, setUserDetails] = useState<userDetails>({
     email: "",
     password: "",
+    role: "",
   });
 
   // handle login
   const handleLogin = () => {
+    // checking email and password is empty or not
+    if (!userDetails.email || !userDetails.password) {
+      toast("Enter email, password!");
+      return;
+    }
     // checking if email is valid or not
     if (!/^[\w\-\\.]+@([\w-]+\.)+[\w-]{2,}$/.test(userDetails?.email)) {
       toast("Enter valid email!");
       return;
     }
-    console.log("hmm");
+    console.log(userDetails);
   };
 
   return (
@@ -55,7 +64,7 @@ const Login = () => {
             className="py-1 rounded-sm w-[20rem] border outline-none px-2"
             onChange={(e) => {
               setUserDetails({
-                password: userDetails?.password,
+                ...userDetails,
                 email: e.target.value,
               });
             }}
@@ -72,13 +81,53 @@ const Login = () => {
             className="py-1 px-2 rounded-sm w-[20rem] border outline-none"
             onChange={(e) => {
               setUserDetails({
-                email: userDetails?.email,
+                ...userDetails,
                 password: e.target.value,
               });
             }}
             value={userDetails?.password}
           />
         </div>
+        <div className="pr-64">
+          <RadioGroup
+            defaultValue="Patient"
+            onSelect={(e) => {
+              console.log(e.target);
+            }}
+          >
+            <div className="flex items-center space-x-2">
+              <RadioGroupItem
+                value="Patient"
+                id="option-one"
+                onClick={() => {
+                  setUserDetails({ ...userDetails, role: "patient" });
+                }}
+              />
+              <Label htmlFor="option-one">Patient</Label>
+            </div>
+            <div className="flex items-center space-x-2">
+              <RadioGroupItem
+                value="Physio"
+                id="option-two"
+                onClick={() => {
+                  setUserDetails({ ...userDetails, role: "physio" });
+                }}
+              />
+              <Label htmlFor="option-thr">Admin</Label>
+            </div>
+            <div className="flex items-center space-x-2">
+              <RadioGroupItem
+                value="Admin"
+                id="option-thr"
+                onClick={() => {
+                  setUserDetails({ ...userDetails, role: "admin" });
+                }}
+              />
+              <Label htmlFor="option-two">Physio</Label>
+            </div>
+          </RadioGroup>
+        </div>
+
         <Button className="w-[20rem] mt-10" onClick={handleLogin}>
           Login
         </Button>
