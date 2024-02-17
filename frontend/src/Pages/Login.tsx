@@ -1,17 +1,26 @@
 import { Button } from "@/components/ui/button";
 import { motion } from "framer-motion";
 import { useState } from "react";
+import { toast } from "sonner";
 
 type userDetails = {
-  email: string | undefined;
-  password: string | undefined;
+  email: string;
+  password: string;
 };
 
 const Login = () => {
-  const [userDetails, setUserDetails] = useState<userDetails>();
+  const [userDetails, setUserDetails] = useState<userDetails>({
+    email: "",
+    password: "",
+  });
 
   // handle login
   const handleLogin = () => {
+    // checking if email is valid or not
+    if (!/^[\w\-\\.]+@([\w-]+\.)+[\w-]{2,}$/.test(userDetails?.email)) {
+      toast("Enter valid email!");
+      return;
+    }
     console.log("hmm");
   };
 
