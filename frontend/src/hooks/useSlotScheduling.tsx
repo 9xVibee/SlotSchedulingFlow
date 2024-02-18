@@ -28,7 +28,25 @@ const useSlotScheduling = () => {
     setFilteredSlots(unBookedSlots);
   };
 
-  return { filteredSlots, loading, getAllSlots, unBookedSlots };
+  //! hanlding day change
+  const handleDayChange = (day: string) => {
+    const dayByFilteredSlots = slots.filter((slot) => slot.day == day);
+    setFilteredSlots(dayByFilteredSlots);
+  };
+
+  //! handling eve change
+  const handleEveChange = () => {
+    console.log("changed eve");
+  };
+
+  return {
+    filteredSlots,
+    loading,
+    getAllSlots,
+    unBookedSlots,
+    handleDayChange,
+    handleEveChange,
+  };
 };
 
 export default useSlotScheduling;

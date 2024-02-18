@@ -36,7 +36,8 @@ const useCreateSlot = () => {
     const dateStr = date;
 
     // Convert the string to a Date object
-    const dateArray = dateStr.split(":");
+    const dateArray = dateStr.split("-");
+
     const dateObject = new Date(
       Number(dateArray[0]),
       Number(dateArray[1]) - 1,
@@ -45,13 +46,13 @@ const useCreateSlot = () => {
 
     // Define an array of day names
     const daysOfWeek = [
-      "Sunday",
-      "Monday",
-      "Tuesday",
-      "Wednesday",
-      "Thursday",
-      "Friday",
-      "Saturday",
+      "sunday",
+      "monday",
+      "tuesday",
+      "wednesday",
+      "thursday",
+      "friday",
+      "saturday",
     ];
 
     // Get the day index from the Date object

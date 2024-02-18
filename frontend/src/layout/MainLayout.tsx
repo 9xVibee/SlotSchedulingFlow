@@ -16,7 +16,7 @@ const MainLayout = () => {
   };
 
   return (
-    <div className="w-full h-[100vh] sm:px-10 relative md:px-20 lg:px-48">
+    <div className="w-full h-[100vh] sm:px-10 relative md:px-10 lg:px-20">
       <div className="absolute top-3 right-2 sm:right-4 md:right-8 flex gap-2 items-center">
         <ModeToggle />
         {user.email && (

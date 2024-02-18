@@ -54,6 +54,7 @@ export const requestSlot = async (req: Request, res: Response) => {
     slotEndTime,
     remark,
   } = req.body;
+  console.log(day);
 
   if (!date && !slotStartTime) {
     return res.status(400).json({

@@ -61,27 +61,24 @@ const eveMood = [
 const SlotScheduling = () => {
   const [openDay, setOpenDay] = React.useState(false);
   const [openEve, setOpenEve] = React.useState(false);
-  const [day, setDay] = React.useState("monday");
-  const [eve, setEve] = React.useState("evening");
+  const [day, setDay] = React.useState("");
+  const [eve, setEve] = React.useState("");
   const { user } = useUserDetails();
 
-  const { loading, filteredSlots, getAllSlots, unBookedSlots } =
-    useSlotScheduling();
+  const {
+    loading,
+    filteredSlots,
+    getAllSlots,
+    unBookedSlots,
+    handleDayChange,
+    handleEveChange,
+  } = useSlotScheduling();
 
   React.useEffect(() => {
     getAllSlots();
     if (user.role == "patient") unBookedSlots();
   }, []);
 
-  //! hanlding day change
-  const handleDayChange = () => {
-    console.log("changed");
-  };
-
-  //! handling eve change
-  const handleEveChange = () => {
-    console.log("changed eve");
-  };
   return (
     <div className="w-full max-md:px-2 h-screen pt-[2.4rem] flex flex-col gap-10">
       {/* Heading Section section */}
@@ -146,7 +143,7 @@ const SlotScheduling = () => {
                       onSelect={(currentValue) => {
                         setDay(currentValue === day ? "" : currentValue);
                         setOpenDay(false);
-                        handleDayChange();
+                        handleDayChange(currentValue);
                       }}
                     >
                       <Check
