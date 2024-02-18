@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 import { useUserDetails } from "@/utils/store";
 import { slotType } from "@/utils/types";
 import axios from "axios";
@@ -23,7 +24,10 @@ const useBookUnBookSlots = () => {
 
       setLoading(false);
       setSlots(res?.data?.slots);
-      setFilteredSlots(res?.data?.slots);
+      const unbookedSlots = res?.data?.slots.filter(
+        (slot: any) => !slot.isAllocated
+      );
+      setFilteredSlots(unbookedSlots);
     } catch (error) {
       console.log("Error in getAllPhysioSlots", error);
       setLoading(false);

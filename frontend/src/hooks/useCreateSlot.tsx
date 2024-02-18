@@ -20,7 +20,6 @@ const useCreateSlot = () => {
 
     // Get the current date
     const currentDate = new Date();
-    currentDate.setDate(currentDate.getDate() + 1);
 
     // Add 7 days to the current date
     const futureDate = new Date(currentDate);
