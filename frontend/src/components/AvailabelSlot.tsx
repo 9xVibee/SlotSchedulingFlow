@@ -21,6 +21,7 @@ type AvailabelSlots = {
   role: string;
   remark: string;
   physioName: string;
+  isAllocated: boolean;
 };
 
 const AvailabelSlot = ({
@@ -29,6 +30,7 @@ const AvailabelSlot = ({
   role,
   remark,
   physioName,
+  isAllocated,
 }: AvailabelSlots) => {
   const [remarks, setRemarks] = useState("");
 
@@ -39,6 +41,7 @@ const AvailabelSlot = ({
 
   return (
     <div className="w-full flex justify-between items-center border rounded-md p-2">
+      {/* left section details */}
       <div className="flex flex-col">
         <h1>
           <span className="font-semibold">Time: </span> {time}
@@ -54,7 +57,7 @@ const AvailabelSlot = ({
           </p>
         )}
       </div>
-      {role == "admin" && (
+      {role == "admin" && isAllocated == false && (
         <>
           <AlertDialog>
             <AlertDialogTrigger asChild>
@@ -81,7 +84,7 @@ const AvailabelSlot = ({
           </AlertDialog>
         </>
       )}
-      {role == "physio" && (
+      {(role == "physio" || role == "admin") && isAllocated && (
         <AlertDialog>
           <AlertDialogTrigger asChild>
             <p className="underline text-gray-500 hover:text-black cursor-pointer">

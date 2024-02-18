@@ -83,6 +83,7 @@ const Appointments = () => {
                 key={idx}
                 physioName={slot.physioName}
                 remark={slot.remark}
+                isAllocated={slot.isAllocated}
                 role={"physio"}
               />
             );

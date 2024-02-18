@@ -13,6 +13,8 @@ import {
 } from "@/components/ui/popover";
 import AvailabelSlot from "@/components/AvailabelSlot";
 import Skeletons from "./Skeleton";
+import useSlotScheduling from "@/hooks/useSlotScheduling";
+import { useUserDetails } from "@/utils/store";
 
 const days = [
   {
@@ -61,20 +63,22 @@ const SlotScheduling = () => {
   const [openEve, setOpenEve] = React.useState(false);
   const [day, setDay] = React.useState("monday");
   const [eve, setEve] = React.useState("evening");
-  const [loading, setLoading] = React.useState(true);
+  const { user } = useUserDetails();
+
+  const { loading, filteredSlots, getAllSlots, unBookedSlots } =
+    useSlotScheduling();
 
   React.useEffect(() => {
-    setTimeout(() => {
-      setLoading(false);
-    }, 3000);
+    if (user.role == "patient") unBookedSlots();
+    else getAllSlots();
   }, []);
 
-  // hanlding day change
+  //! hanlding day change
   const handleDayChange = () => {
     console.log("changed");
   };
 
-  // handling eve change
+  //! handling eve change
   const handleEveChange = () => {
     console.log("changed eve");
   };
@@ -82,6 +86,7 @@ const SlotScheduling = () => {
     <div className="w-full h-screen pt-[2.4rem] flex flex-col gap-10">
       {/* Heading Section section */}
       <div className="w-full flex justify-between items-center py-2 overflow-y-hidden">
+        {/* heading */}
         <motion.h1
           initial={{
             y: 100,
@@ -98,6 +103,7 @@ const SlotScheduling = () => {
         >
           Schedule Your Slot.
         </motion.h1>
+        {/* dropdown */}
         <motion.div
           initial={{
             y: 100,
@@ -196,20 +202,21 @@ const SlotScheduling = () => {
       </div>
       {/* Availabel Slots */}
       <div className="hideScrollBar w-full flex flex-col overflow-y-scroll h-3/4 gap-4 py-2">
-        {Array(10)
-          .fill("")
-          .map((_, idx) => {
-            if (loading) return <Skeletons />;
-            else
-              return (
-                <AvailabelSlot
-                  role="admin"
-                  time="10:00"
-                  day="Monday"
-                  key={idx}
-                />
-              );
-          })}
+        {filteredSlots.map((slot, idx) => {
+          if (loading) return <Skeletons />;
+          else
+            return (
+              <AvailabelSlot
+                role={user.role}
+                time={slot.slotStartTime}
+                day={slot.day}
+                physioName={slot.physioName}
+                remark={slot.remark}
+                isAllocated={slot.isAllocated}
+                key={idx}
+              />
+            );
+        })}
       </div>
     </div>
   );
