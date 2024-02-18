@@ -18,7 +18,7 @@ const Appointments = () => {
   const redirectThePhysio = () => {
     const curDate = new Date();
 
-    if (curDate.getDay() == 6) navigate("/createslot");
+    if (curDate.getDay() == 0) navigate("/createslot");
     else
       toast("Slot can only be create on sunday", {
         position: "top-center",
@@ -84,6 +84,7 @@ const Appointments = () => {
                 physioName={slot.physioName}
                 remark={slot.remark}
                 isAllocated={slot.isAllocated}
+                _id={slot._id}
                 role={"physio"}
               />
             );

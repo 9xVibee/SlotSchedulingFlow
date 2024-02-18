@@ -31,4 +31,16 @@ export type slotType = {
   isAllocated: boolean;
   slotStartTime: string;
   physioName: string;
+  _id: string;
+};
+
+export type createSlotType = {
+  date: string;
+  weekStart: string;
+  weekEnd: string;
+  slotStartTime: string;
+  email: string;
+  day: string;
+  slotEndTime: string;
+  remark: string;
 };

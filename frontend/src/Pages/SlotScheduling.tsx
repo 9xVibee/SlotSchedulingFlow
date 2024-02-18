@@ -69,8 +69,8 @@ const SlotScheduling = () => {
     useSlotScheduling();
 
   React.useEffect(() => {
+    getAllSlots();
     if (user.role == "patient") unBookedSlots();
-    else getAllSlots();
   }, []);
 
   //! hanlding day change
@@ -201,12 +201,13 @@ const SlotScheduling = () => {
         </motion.div>
       </div>
       {/* Availabel Slots */}
-      <div className="hideScrollBar w-full flex flex-col overflow-y-scroll h-3/4 gap-4 py-2">
+      <div className="w-full flex flex-col overflow-y-scroll h-3/4 gap-4 py-2 hideScrollBar">
         {filteredSlots.map((slot, idx) => {
           if (loading) return <Skeletons />;
           else
             return (
               <AvailabelSlot
+                _id={slot._id}
                 role={user.role}
                 time={slot.slotStartTime}
                 day={slot.day}

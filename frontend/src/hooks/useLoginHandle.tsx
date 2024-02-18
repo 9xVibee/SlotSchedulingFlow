@@ -16,6 +16,8 @@ const useLoginHandle = () => {
   const { setUserDetail } = useUserDetails();
 
   const handleLogin = async () => {
+    console.log(userDetails);
+
     // checking email and password is empty or not
     if (!userDetails.email || !userDetails.password) {
       toast("Enter email, password!");

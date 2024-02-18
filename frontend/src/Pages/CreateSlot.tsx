@@ -1,30 +1,17 @@
 import { motion } from "framer-motion";
-import { FormEvent, useState } from "react";
 
-import { format } from "date-fns";
-
-import { Button } from "@/components/ui/button";
-import { Calendar } from "@/components/ui/calendar";
-import {
-  Popover,
-  PopoverContent,
-  PopoverTrigger,
-} from "@/components/ui/popover";
-import { CalendarDays, PlusCircle } from "lucide-react";
+import { PlusCircle } from "lucide-react";
 import { toast } from "sonner";
+import { Button } from "@/components/ui/button";
+import useCreateSlot from "@/hooks/useCreateSlot";
 
 const CreateSlot = () => {
-  const [time, setTime] = useState("");
-  const [date, setDate] = useState<Date>();
+  //! extracting date and time from custom hook
+  const { handleCreateSlot, setDate, setTime, date, time, loading } =
+    useCreateSlot();
 
-  // creating new slot for the particular physio
-  const handleCreateSlot = (e: FormEvent<HTMLFormElement>) => {
-    e.preventDefault();
-    console.log(time, date);
-  };
-
-  // checking if date is from same week or not
-  const handleDateChange = (e: Date | undefined) => {
+  //! checking if date is from same week or not
+  const handleDateChange = (date: string) => {
     // Get the current date
     const currentDate = new Date();
 
@@ -41,11 +28,10 @@ const CreateSlot = () => {
     }
 
     if (
-      e !== undefined &&
-      e.getDate() > currentDate.getDate() &&
-      e.getDate() <= futureDate.getDate()
+      Number(date.toString().slice(8)) > currentDate.getDate() &&
+      Number(date.toString().slice(8)) <= futureDate.getDate()
     ) {
-      console.log("yess");
+      setDate(date);
     } else {
       toast("Select date between this week", {
         duration: 1500,
@@ -81,31 +67,13 @@ const CreateSlot = () => {
       >
         <div className="flex flex-col gap-2">
           <label className="text-xl">Select the Date:</label>
-          <Popover>
-            <PopoverTrigger asChild>
-              <Button
-                variant={"outline"}
-                className={`
-                w-[23.5rem] justify-start text-left font-normal
-                ${!date && "text-muted-foreground"}`}
-              >
-                {/* <CalendarIcon className="mr-2 h-4 w-4" /> */}
-                <CalendarDays className="mr-2 h-4 w-4" />
-                {date ? format(date, "PPP") : <span>Pick a date</span>}
-              </Button>
-            </PopoverTrigger>
-            <PopoverContent className="w-auto p-0" align="start">
-              <Calendar
-                mode="single"
-                selected={date}
-                onSelect={(e) => {
-                  setDate(e);
-                  handleDateChange(e);
-                }}
-                initialFocus
-              />
-            </PopoverContent>
-          </Popover>
+          <input
+            type="date"
+            value={date}
+            onChange={(e) => {
+              handleDateChange(e.target.value);
+            }}
+          />
         </div>
         <div className="flex flex-col gap-2">
           <label className="text-xl">Select the Time: (24 hours wise)</label>
@@ -116,7 +84,11 @@ const CreateSlot = () => {
             onChange={(e) => setTime(String(e.target.value))}
           />
         </div>
-        <Button type="submit" className="w-[23.5rem] flex items-center gap-2">
+        <Button
+          type="submit"
+          className="w-[23.5rem] flex items-center gap-2"
+          disabled={loading}
+        >
           Create Slot <PlusCircle className="size-4 mt-[0.1rem]" />
         </Button>
       </form>

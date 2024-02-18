@@ -1,7 +1,6 @@
 import { BellPlus } from "lucide-react";
 import { Button } from "./ui/button";
 // import { Link } from "react-router-dom";
-import { toast } from "sonner";
 import {
   AlertDialog,
   AlertDialogAction,
@@ -14,6 +13,7 @@ import {
 } from "@/components/ui/alert-dialog";
 import { Textarea } from "./ui/textarea";
 import { useState } from "react";
+import useSlotAllocation from "@/hooks/useSlotAllocation";
 
 type AvailabelSlots = {
   time: string;
@@ -22,6 +22,7 @@ type AvailabelSlots = {
   remark: string;
   physioName: string;
   isAllocated: boolean;
+  _id: string;
 };
 
 const AvailabelSlot = ({
@@ -31,13 +32,10 @@ const AvailabelSlot = ({
   remark,
   physioName,
   isAllocated,
+  _id,
 }: AvailabelSlots) => {
   const [remarks, setRemarks] = useState("");
-
-  //! allocating the slot
-  const handlePopOver = () => {
-    toast("Okayy");
-  };
+  const { handleSlotAllocation, loading } = useSlotAllocation();
 
   return (
     <div className="w-full flex justify-between items-center border rounded-md p-2">
@@ -61,7 +59,10 @@ const AvailabelSlot = ({
         <>
           <AlertDialog>
             <AlertDialogTrigger asChild>
-              <Button className="flex items-center justify-center gap-2">
+              <Button
+                className="flex items-center justify-center gap-2"
+                disabled={loading}
+              >
                 Allocate Slot <BellPlus className="size-5 mt-1" />
               </Button>
             </AlertDialogTrigger>
@@ -76,7 +77,9 @@ const AvailabelSlot = ({
                 </AlertDialogDescription>
               </AlertDialogHeader>
               <AlertDialogFooter>
-                <AlertDialogAction onClick={handlePopOver}>
+                <AlertDialogAction
+                  onClick={() => handleSlotAllocation(_id, remarks)}
+                >
                   Submit
                 </AlertDialogAction>
               </AlertDialogFooter>
