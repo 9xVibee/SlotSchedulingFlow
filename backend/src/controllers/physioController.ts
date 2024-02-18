@@ -44,8 +44,16 @@ export const loginPhysio = async (req: Request, res: Response) => {
 };
 
 export const requestSlot = async (req: Request, res: Response) => {
-  const { date, weekStart, weekEnd, slotStartTime, email, day, slotEndTime } =
-    req.body;
+  const {
+    date,
+    weekStart,
+    weekEnd,
+    slotStartTime,
+    email,
+    day,
+    slotEndTime,
+    remark,
+  } = req.body;
 
   if (!date && !slotStartTime) {
     return res.status(400).json({
@@ -57,7 +65,6 @@ export const requestSlot = async (req: Request, res: Response) => {
 
   let slot = await Slots.findOne({
     createdBy: physio._id,
-    isAllocated: true,
     $and: [
       { day: day },
       {
@@ -82,6 +89,7 @@ export const requestSlot = async (req: Request, res: Response) => {
     day,
     slotStartTime,
     slotEndTime,
+    remark,
   });
 
   res.status(200).json({
@@ -99,6 +107,7 @@ export const getAllSlotsPhysio = async (req: Request, res: Response) => {
       message: "Physio not found",
     });
   }
+
   const date = new Date().toISOString().slice(0, 10);
   const slots = await Slots.find({
     createdBy: physio._id,

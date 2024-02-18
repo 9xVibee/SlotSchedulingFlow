@@ -19,12 +19,20 @@ type AvailabelSlots = {
   time: string;
   day: string;
   role: string;
+  remark: string;
+  physioName: string;
 };
 
-const AvailabelSlot = ({ time, day, role }: AvailabelSlots) => {
+const AvailabelSlot = ({
+  time,
+  day,
+  role,
+  remark,
+  physioName,
+}: AvailabelSlots) => {
   const [remarks, setRemarks] = useState("");
 
-  // for opening closing popover
+  //! allocating the slot
   const handlePopOver = () => {
     toast("Okayy");
   };
@@ -39,10 +47,10 @@ const AvailabelSlot = ({ time, day, role }: AvailabelSlots) => {
           <span className="font-semibold">Day: </span>
           {day}
         </p>
-        {false && (
+        {role == "admin" && (
           <p>
             <span className="font-semibold">Physio Name: </span>
-            Pranshu Verma
+            {physioName}
           </p>
         )}
       </div>
@@ -72,6 +80,26 @@ const AvailabelSlot = ({ time, day, role }: AvailabelSlots) => {
             </AlertDialogContent>
           </AlertDialog>
         </>
+      )}
+      {role == "physio" && (
+        <AlertDialog>
+          <AlertDialogTrigger asChild>
+            <p className="underline text-gray-500 hover:text-black cursor-pointer">
+              Remark
+            </p>
+          </AlertDialogTrigger>
+          <AlertDialogContent>
+            <AlertDialogHeader>
+              <AlertDialogTitle>Remarks:</AlertDialogTitle>
+              <AlertDialogDescription>
+                <p>{remark}</p>
+              </AlertDialogDescription>
+            </AlertDialogHeader>
+            <AlertDialogFooter>
+              <AlertDialogAction>Close</AlertDialogAction>
+            </AlertDialogFooter>
+          </AlertDialogContent>
+        </AlertDialog>
       )}
     </div>
   );
