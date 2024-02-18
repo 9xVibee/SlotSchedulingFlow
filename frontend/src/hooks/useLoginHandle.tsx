@@ -20,12 +20,16 @@ const useLoginHandle = () => {
 
     // checking email and password is empty or not
     if (!userDetails.email || !userDetails.password) {
-      toast("Enter email, password!");
+      toast("Enter email, password!", {
+        position: "top-center",
+      });
       return;
     }
     // checking if email is valid or not
     if (!/^[\w\-\\.]+@([\w-]+\.)+[\w-]{2,}$/.test(userDetails?.email)) {
-      toast("Enter valid email!");
+      toast("Enter valid email!", {
+        position: "top-center",
+      });
       return;
     }
 

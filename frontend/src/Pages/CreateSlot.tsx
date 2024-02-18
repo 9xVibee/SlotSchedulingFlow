@@ -40,7 +40,7 @@ const CreateSlot = () => {
   };
 
   return (
-    <div className="w-full h-full pt-[1rem] flex justify-center items-center flex-col gap-8">
+    <div className="w-full h-full max-md:px-2 pt-[1rem] flex justify-center items-center flex-col gap-8">
       <div className="w-full flex justify-center items-center py-2 overflow-y-hidden">
         <motion.h1
           initial={{
@@ -54,7 +54,7 @@ const CreateSlot = () => {
             duration: 0.8,
             ease: "easeInOut",
           }}
-          className="font-bold text-6xl uppercase"
+          className="font-bold text-5xl md:text-6xl uppercase"
         >
           Create Slot.
         </motion.h1>
@@ -73,20 +73,21 @@ const CreateSlot = () => {
             onChange={(e) => {
               handleDateChange(e.target.value);
             }}
+            className="w-[22rem] sm:w-[23.5rem]"
           />
         </div>
         <div className="flex flex-col gap-2">
           <label className="text-xl">Select the Time: (24 hours wise)</label>
           <input
             type="time"
-            className="text-black w-[23.5rem] rounded-md py-1 outline-none border"
+            className="text-black w-[22rem] sm:w-[23.5rem] rounded-md py-1 outline-none border"
             value={time}
             onChange={(e) => setTime(String(e.target.value))}
           />
         </div>
         <Button
           type="submit"
-          className="w-[23.5rem] flex items-center gap-2"
+          className="w-[22rem] sm:w-[23.5rem] flex items-center gap-2"
           disabled={loading}
         >
           Create Slot <PlusCircle className="size-4 mt-[0.1rem]" />

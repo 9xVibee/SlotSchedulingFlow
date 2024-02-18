@@ -24,7 +24,7 @@ const Home = () => {
               duration: 0.7,
               ease: "easeInOut",
             }}
-            className="text-7xl uppercase font-bold transform"
+            className="text-4xl sm:text-5xl md:text-7xl uppercase font-bold transform"
           >
             Fix Health.com
           </motion.h1>
@@ -42,7 +42,7 @@ const Home = () => {
               duration: 0.7,
               ease: "easeInOut",
             }}
-            className="text-[1rem] text-gray-600 uppercase transform"
+            className="text-[0.8rem] md:text-[1rem] text-gray-600 uppercase transform"
           >
             Book your slot for 1v1 section with the physio.
           </motion.p>

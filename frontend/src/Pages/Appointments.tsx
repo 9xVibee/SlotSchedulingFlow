@@ -26,28 +26,45 @@ const Appointments = () => {
   };
 
   return (
-    <div className="w-full h-screen pt-[3rem] flex flex-col gap-8">
-      <div className="flex flex-col gap-2">
-        <div className="w-full flex justify-between items-center py-2 overflow-y-hidden">
+    <div className="w-full h-screen pt-[3rem] flex flex-col gap-8 max-md:px-2">
+      <div className="flex flex-col gap-2 max-md:mt-6">
+        <div className="w-full flex justify-between items-center py-2">
           <motion.h1
             initial={{
-              y: 100,
+              y: 60,
+              opacity: 0,
             }}
             animate={{
               y: 0,
+              opacity: 1,
             }}
             transition={{
               delay: 0.4,
               duration: 0.8,
               ease: "easeInOut",
             }}
-            className="font-bold text-6xl uppercase"
+            className="font-bold text-4xl sm:text-5xl md:text-6xl uppercase"
           >
             Appointments.
           </motion.h1>
         </div>
         <div className="flex justify-between w-full">
-          <div className="flex gap-2">
+          <motion.div
+            initial={{
+              y: 60,
+              opacity: 0,
+            }}
+            animate={{
+              y: 0,
+              opacity: 1,
+            }}
+            transition={{
+              delay: 0.4,
+              duration: 0.8,
+              ease: "easeInOut",
+            }}
+            className="flex gap-2"
+          >
             <Button
               onClick={() => {
                 setBooked(!booked);
@@ -66,7 +83,7 @@ const Appointments = () => {
             >
               Not-Booked
             </Button>
-          </div>
+          </motion.div>
           {<Button onClick={redirectThePhysio}>Slot Availability</Button>}
         </div>
       </div>

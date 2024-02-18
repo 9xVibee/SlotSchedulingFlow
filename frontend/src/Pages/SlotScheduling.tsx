@@ -83,40 +83,44 @@ const SlotScheduling = () => {
     console.log("changed eve");
   };
   return (
-    <div className="w-full h-screen pt-[2.4rem] flex flex-col gap-10">
+    <div className="w-full max-md:px-2 h-screen pt-[2.4rem] flex flex-col gap-10">
       {/* Heading Section section */}
-      <div className="w-full flex justify-between items-center py-2 overflow-y-hidden">
+      <div className="w-full max-md:flex-col max-md:items-start max-md:mt-4 flex justify-between items-center py-2 ">
         {/* heading */}
         <motion.h1
           initial={{
-            y: 100,
+            y: 60,
+            opacity: 0,
           }}
           animate={{
             y: 0,
+            opacity: 1,
           }}
           transition={{
             delay: 0.4,
             duration: 0.8,
             ease: "easeInOut",
           }}
-          className="font-bold text-6xl uppercase"
+          className="font-bold text-3xl sm:text-4xl md:text-5xl lg:text-6xl uppercase"
         >
           Schedule Your Slot.
         </motion.h1>
         {/* dropdown */}
         <motion.div
           initial={{
-            y: 100,
+            y: 60,
+            opacity: 0,
           }}
           animate={{
             y: 0,
+            opacity: 1,
           }}
           transition={{
             delay: 0.5,
             duration: 0.8,
             ease: "easeInOut",
           }}
-          className="flex gap-4"
+          className="flex mt-4 md:mt-0 gap-2 md:gap-4 max-md:flex-col"
         >
           <Popover open={openDay} onOpenChange={setOpenDay}>
             <PopoverTrigger asChild>
@@ -201,7 +205,22 @@ const SlotScheduling = () => {
         </motion.div>
       </div>
       {/* Availabel Slots */}
-      <div className="w-full flex flex-col overflow-y-scroll h-3/4 gap-4 py-2 hideScrollBar">
+      <motion.div
+        initial={{
+          y: 60,
+          opacity: 0,
+        }}
+        animate={{
+          y: 0,
+          opacity: 1,
+        }}
+        transition={{
+          delay: 0.4,
+          duration: 0.8,
+          ease: "easeInOut",
+        }}
+        className="w-full flex flex-col overflow-y-scroll h-3/4 gap-4 py-2 hideScrollBar"
+      >
         {filteredSlots.map((slot, idx) => {
           if (loading) return <Skeletons />;
           else
@@ -218,7 +237,7 @@ const SlotScheduling = () => {
               />
             );
         })}
-      </div>
+      </motion.div>
     </div>
   );
 };
