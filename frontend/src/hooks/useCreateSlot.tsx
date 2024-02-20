@@ -86,16 +86,19 @@ const useCreateSlot = () => {
   }: createSlotType) => {
     try {
       setLoading(true);
-      const res = await axios.post("http://localhost:3000/api/physio/slots", {
-        date,
-        day,
-        email,
-        remark,
-        slotEndTime,
-        slotStartTime,
-        weekEnd,
-        weekStart,
-      });
+      const res = await axios.post(
+        "https://slotschedulingflowbackend.onrender.com/api/physio/slots",
+        {
+          date,
+          day,
+          email,
+          remark,
+          slotEndTime,
+          slotStartTime,
+          weekEnd,
+          weekStart,
+        }
+      );
       toast(res?.data?.message);
       setLoading(false);
       setTime("");

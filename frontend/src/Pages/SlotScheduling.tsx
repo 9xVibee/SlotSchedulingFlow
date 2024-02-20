@@ -15,6 +15,8 @@ import AvailabelSlot from "@/components/AvailabelSlot";
 import Skeletons from "./Skeleton";
 import useSlotScheduling from "@/hooks/useSlotScheduling";
 import { useUserDetails } from "@/utils/store";
+import { useNavigate } from "react-router-dom";
+import { toast } from "sonner";
 
 const days = [
   {
@@ -64,20 +66,25 @@ const SlotScheduling = () => {
   const [day, setDay] = React.useState("");
   const [eve, setEve] = React.useState("");
   const { user } = useUserDetails();
+  const navigate = useNavigate();
 
   const {
     loading,
     filteredSlots,
     getAllSlots,
-    unBookedSlots,
     handleDayChange,
     handleEveChange,
   } = useSlotScheduling();
 
   React.useEffect(() => {
     getAllSlots();
-    if (user.role == "patient") unBookedSlots();
   }, []);
+
+  if (!user.role || user.role == "physio") {
+    navigate("/login");
+    toast("login to access this page and Physio cannot access this page");
+    return;
+  }
 
   return (
     <div className="w-full max-md:px-2 h-screen pt-[2.4rem] flex flex-col gap-10">
@@ -169,7 +176,7 @@ const SlotScheduling = () => {
               >
                 {eve
                   ? eveMood.find((eveMoods) => eveMoods.value === eve)?.label
-                  : "Select Day"}
+                  : "Select Mood"}
                 <ChevronsUpDown className="ml-2 h-4 w-4 shrink-0 opacity-50" />
               </Button>
             </PopoverTrigger>
@@ -183,7 +190,7 @@ const SlotScheduling = () => {
                       onSelect={(currentValue) => {
                         setEve(currentValue === eve ? "" : currentValue);
                         setOpenEve(false);
-                        handleEveChange();
+                        handleEveChange(currentValue);
                       }}
                     >
                       <Check
@@ -220,6 +227,7 @@ const SlotScheduling = () => {
       >
         {filteredSlots.map((slot, idx) => {
           if (loading) return <Skeletons />;
+          else if (user.role == "patient" && slot.isAllocated) return null;
           else
             return (
               <AvailabelSlot
@@ -234,6 +242,11 @@ const SlotScheduling = () => {
               />
             );
         })}
+        {filteredSlots.filter((item) => item.isAllocated == false).length ==
+          0 &&
+          user.role == "patient" && (
+            <p className="text-center text-xl">No slots available</p>
+          )}
       </motion.div>
     </div>
   );

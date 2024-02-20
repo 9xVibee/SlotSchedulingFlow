@@ -6,7 +6,8 @@ import useLoginHandle from "@/hooks/useLoginHandle";
 
 const Login = () => {
   // using custom hook use loginHandle
-  const { handleLogin, setUserDetails, userDetails } = useLoginHandle();
+  const { handleLogin, setUserDetails, userDetails, loading } =
+    useLoginHandle();
 
   return (
     <div className="w-full h-full pt-[1rem] flex justify-center items-center flex-col gap-8">
@@ -36,7 +37,7 @@ const Login = () => {
           <input
             id="email"
             type="text"
-            className="py-1 rounded-sm w-[20rem] border outline-none px-2"
+            className="py-1 rounded-sm w-[20rem] border outline-none px-2 text-black"
             onChange={(e) => {
               setUserDetails({
                 ...userDetails,
@@ -53,7 +54,7 @@ const Login = () => {
           <input
             id="password"
             type="text"
-            className="py-1 px-2 rounded-sm w-[20rem] border outline-none"
+            className="py-1 px-2 rounded-sm w-[20rem] border outline-none text-black"
             onChange={(e) => {
               setUserDetails({
                 ...userDetails,
@@ -103,8 +104,12 @@ const Login = () => {
           </RadioGroup>
         </div>
 
-        <Button className="w-[20rem] mt-10" onClick={handleLogin}>
-          Login
+        <Button
+          className="w-[20rem] mt-10"
+          onClick={handleLogin}
+          disabled={loading}
+        >
+          {loading ? "Loading..." : "Login"}
         </Button>
       </div>
     </div>
