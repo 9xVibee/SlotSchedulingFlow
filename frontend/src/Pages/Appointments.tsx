@@ -23,7 +23,8 @@ const Appointments = () => {
   const redirectThePhysio = () => {
     const curDate = new Date();
 
-    if (curDate.getDay() == 2) navigate("/createslot");
+    if (curDate.getDay() == 3 || curDate.getDay() == 4 || curDate.getDay() == 3)
+      navigate("/createslot");
     else
       toast("Slot can only be create on sunday", {
         position: "top-center",
@@ -33,8 +34,8 @@ const Appointments = () => {
   const handleIsExist = async () => {
     try {
       const res = await axios.get(
-        "http://localhost:3000/api/physio/is-already-submitted"
-        // "https://slotschedulingflowbackend.onrender.com/api/physio/is-already-submitted"
+        // "http://localhost:3000/api/physio/is-already-submitted"
+        "https://slotschedulingflowbackend.onrender.com/api/physio/isalreadysubmitted"
       );
 
       setExist(res?.data?.isExist);
